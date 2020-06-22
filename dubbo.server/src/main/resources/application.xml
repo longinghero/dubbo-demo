@@ -7,11 +7,22 @@
     <dubbo:registry address="zookeeper://127.0.0.1:2181" />  
     <dubbo:protocol name="dubbo" port="20880" />  
       
+    <dubbo:provider serialization="hessian2" retries="0" filter="setOrg" timeout="3000" threads="300" />
+      
+      
     <!-- 和本地bean一样实现服务 -->   
     <bean id="demoService" class="com.longing.dubbo.server.impl.DemoServiceImpl" />  
   
     <!-- 向注册中心注册暴漏服务地址,注册服务 -->  
     <dubbo:service interface="com.longing.dubbo.server.DemoService"  
         ref="demoService" executes="10" />  
+        
+        <!-- 和本地bean一样实现服务 -->   
+    <bean id="demoService2" class="com.longing.dubbo.server.impl.DemoService2Impl" />  
+  
+    <!-- 向注册中心注册暴漏服务地址,注册服务 -->  
+    <dubbo:service interface="com.longing.dubbo.server.DemoService2"  
+        ref="demoService2" executes="10" />  
+  
   
 </beans>  
